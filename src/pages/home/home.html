@@ -8,12 +8,12 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let animal of animales">
+    <ion-item *ngFor="let animal of animales"
+     (click)="reproducir(animal)" >
       <ion-avatar item-left>
-        <img src="assets/animales/caballo.png">
+        <img [src]="animal.imagen">
       </ion-avatar>
-      <h2>Caballo</h2>
-      <p>Bonito animal</p>
+      <h2>{{animal.nombre}}</h2>
     </ion-item>
   </ion-list>
 </ion-content>
