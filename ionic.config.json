@@ -1,0 +1,7 @@
+{
+  "name": "SonidosAnimales",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
