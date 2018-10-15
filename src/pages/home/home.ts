@@ -13,15 +13,36 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
     this.animales = ANIMALES.slice(0);
   }
+  audio = new Audio();
   //a:Animal se pasa por referencia
   reproducir (a:Animal){
     console.log (a);
-    let audio = new Audio;
-    audio.src = a.audio;
-    audio.load();
-    audio.play();
+    this.pausar_audio(a);
+    if (a.reproduciendo){
+      a.reproduciendo=false;
+      return;
+    }
+    
+    this.audio.src = a.audio;
+    this.audio.load();
+    this.audio.play();
 
-    setTimeout(()=>a.reproduciendo,a.duracion*1000);
+    a.reproduciendo = true;
+    this.audioTiempo = setTimeout(()=>a.reproduciendo,a.duracion*1000);
+
+  }
+
+  audioTiempo :any;
+  private pausar_audio(animalSel:Animal){
+    clearTimeout(this.audioTiempo);
+    this.audio.pause();
+    this.audio.currentTime =0;
+
+    for (let a of this.animales){
+      if (a.nombre != animalSel.nombre){
+        a.reproduciendo = false;
+      }
+    }
 
   }
 
